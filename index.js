@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 
 //Posting File
 app.post('/api/v1/upload', upload.single('fileUpload'), function(req, res){
-	res.end(req.file.originalname + "has been uploaded successfully!");
+	res.end(req.file.originalname + " has been uploaded successfully!");
 });
 
 app.listen(8081, function(){
