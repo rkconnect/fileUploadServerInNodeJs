@@ -1,0 +1,19 @@
+<! DOCTYPE HTML>
+<HTML>
+	<head>
+		<title>File Uploader</title>
+	</head>
+	<body>
+		<h1>
+			File Upload
+		</h1>
+		<form id = 'file'
+					enctype = 'multipart/form-data'
+					action = '/api/v1/upload'
+					method = 'post'>
+			Please select the file to be uploaded: <br>
+			<input type = 'file' name ='fileUpload'/>
+			<input type = 'submit' value = 'Upload' name = 'upload'/>			
+		</form>
+	</body>
+</HTML>
