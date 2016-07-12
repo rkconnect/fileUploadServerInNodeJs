@@ -1,5 +1,5 @@
 {
-  "name": "uploadserver",
+  "name": "fileUploadServerInNodeJs",
   "version": "1.0.0",
   "description": "A simple file upload server in NodeJs, using express and multer module",
   "main": "index.html",

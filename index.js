@@ -9,7 +9,8 @@ var storage = multer.diskStorage({
 		callback (null, './upload');
 	},
 	filename: function(req, file, callback){
-		callback(null, file.fieldname + '-' + Date.now());
+		var name = file.originalname.split('.', 2);
+		callback(null, name[0] + '-' + Date.now() + '.' + name[1]);
 	}
 });
 
@@ -22,6 +23,9 @@ app.get('/', function(req, res){
 
 //Posting File
 app.post('/api/v1/upload', upload.single('fileUpload'), function(req, res){
+	if (req.file == null){
+		return res.end("Please select some file");
+	}
 	res.end(req.file.originalname + " has been uploaded successfully!");
 });
 
