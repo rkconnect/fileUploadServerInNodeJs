@@ -15,7 +15,7 @@ var storage = multer.diskStorage({
 	}
 });
 
-var upload = multer({	storage : storage }).single('fileUpload');
+var upload = multer({	storage : storage }).array('fileUpload',10);
 
 //Serving Index.html
 app.get('/', function(req, res){
@@ -27,12 +27,24 @@ app.post('/api/v1/upload', function(req, res){
 	upload(req, res, function(err){
 		if(err){
 			console.log(err.stack);
-			return res.end('Soething went wrong!!');
+			return res.end('Something went wrong!!');
 		}
-		if (req.file == null){
+		
+		var responseString = '';
+		var i = 0;
+		
+		if (req.files.length === 0){
 			return res.end("Please select some file");
 		}
-		res.end(req.file.originalname + " has been uploaded successfully!");
+		if(req.files.length === 1){
+			responseString += req.files[0].originalname + ' has een uploaded successfully!!';
+		}else{
+			responseString += 'Following ' + req.files.length + ' files have been uploaded successfully:';
+			for(i = 0; i < req.files.length; i++){
+				responseString += '\n' + req.files[i].originalname;
+			}
+		}
+		res.end(responseString);
 	});
 });
 
